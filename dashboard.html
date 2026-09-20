@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quantum-Resilient Cyber-Safety Governance and Consolidated Internal Control Framework for Commercial Aviation — Composite Scoring Dashboard</title>
+<style>
+  :root {
+    --bg: #0e1117;
+    --panel: #161b22;
+    --panel-2: #1c2330;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #00CC96;
+    --red: #EF553B;
+    --orange: #FFA15A;
+    --purple: #AB63FA;
+    --blue: #636EFA;
+    --yellow: #F2C744;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  header.topbar {
+    padding: 22px 32px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #161b22 0%, #0e1117 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  header.topbar h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    background: linear-gradient(90deg, #58a6ff 0%, #00CC96 50%, #AB63FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header.topbar .sub {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  button {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+  }
+  button:hover { border-color: var(--accent); background: #22303f; }
+  button.primary {
+    background: linear-gradient(135deg, #1f6feb, #58a6ff);
+    border-color: #1f6feb;
+    color: #fff;
+    font-weight: 600;
+  }
+  button.primary:hover { background: linear-gradient(135deg, #2b7fff, #79b8ff); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 20px;
+    padding: 20px 32px 8px 32px;
+    align-items: start;
+  }
+
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .panel h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--muted);
+    margin: 0 0 14px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .panel h2 .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+
+  .field { margin-bottom: 14px; }
+
+  .field label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .field label .val {
+    color: var(--text);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    padding: 1px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    min-width: 58px;
+    text-align: right;
+  }
+
+  input[type=range] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(90deg, #1f6feb, #58a6ff);
+    border-radius: 3px;
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #58a6ff;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(88,166,255,0.5);
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px; border-radius: 50%;
+    background: #fff; border: 3px solid #58a6ff; cursor: pointer;
+  }
+
+  select, input[type=number] {
+    width: 100%;
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+  }
+  select:focus, input[type=number]:focus { border-color: var(--accent); }
+
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+  }
+  .check-row:hover { border-color: var(--accent); }
+  .check-row input { accent-color: #58a6ff; width: 16px; height: 16px; cursor: pointer; }
+  .check-row span.lbl { flex: 1; font-size: 12.5px; }
+  .check-row span.wt { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 800px) {
+    .results-grid { grid-template-columns: 1fr; }
+  }
+
+  .gauge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .gauge-label {
+    text-align: center;
+    margin-top: -14px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .verdict {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    border-left: 4px solid var(--green);
+    background: rgba(0, 204, 150, 0.08);
+    text-align: left;
+  }
+  .verdict.warn { border-left-color: var(--orange); background: rgba(255, 161, 90, 0.08); }
+  .verdict.bad { border-left-color: var(--red); background: rgba(239, 85, 59, 0.08); }
+  .verdict .title {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+  .verdict .msg { color: var(--muted); font-size: 12.5px; }
+
+  .dims {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    padding: 0 32px 20px 32px;
+  }
+
+  .dim-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .dim-card:hover { transform: translateY(-2px); border-color: #4b5563; }
+
+  .dim-card .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+  }
+  .dim-card .name { font-size: 13px; font-weight: 600; }
+  .dim-card .weight {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 7px;
+  }
+  .dim-card .score {
+    font-size: 30px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    margin: 6px 0 10px 0;
+  }
+  .dim-card .score small { font-size: 14px; color: var(--muted); font-weight: 500; }
+
+  .bar-track {
+    height: 6px;
+    background: #21262d;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(.2,.8,.2,1);
+  }
+  .dim-card .hint { font-size: 11.5px; color: var(--muted); }
+
+  .matrix-wrap { padding: 0 32px 24px 32px; }
+
+  table.matrix {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table.matrix th, table.matrix td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table.matrix th {
+    background: var(--panel-2);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  table.matrix tr:last-child td { border-bottom: none; }
+  table.matrix td.mono { font-variant-numeric: tabular-nums; }
+
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+  .pill.pass { background: rgba(0,204,150,0.15); color: #00CC96; border: 1px solid rgba(0,204,150,0.3); }
+  .pill.fail { background: rgba(239,85,59,0.15); color: #EF553B; border: 1px solid rgba(239,85,59,0.3); }
+  .pill.partial { background: rgba(255,161,90,0.15); color: #FFA15A; border: 1px solid rgba(255,161,90,0.3); }
+
+  .formula {
+    margin: 0 32px 24px 32px;
+    padding: 14px 18px;
+    background: var(--panel);
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .formula b { color: var(--text); }
+
+  footer {
+    padding: 20px 32px 40px 32px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11.5px;
+    border-top: 1px solid var(--border);
+    margin-top: 12px;
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    .actions, header.topbar button { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <h1>🛡️ Quantum-Resilient Cyber-Safety Governance and Consolidated Internal Control Framework for Commercial Aviation</h1>
+    <div class="sub">Composite Scoring Dashboard · UWE Bristol Research Artefact · Joel Aluko Olatunji 25012052</div>
+  </div>
+  <div class="actions">
+    <button onclick="loadBaseline()">↺ Load Thesis Baseline</button>
+    <button onclick="exportReport()">⬇ Export JSON Report</button>
+    <button class="primary" onclick="window.print()">🖨 Print / PDF</button>
+  </div>
+</header>
+
+<div class="layout">
+  <!-- ================= INPUT PANEL ================= -->
+  <aside class="panel" id="inputs">
+    <h2><span class="dot"></span> Safety &amp; Performance</h2>
+
+    <div class="field">
+      <label>Mean Handshake Latency <span class="val" id="v-mean">145 ms</span></label>
+      <input type="range" id="mean" min="40" max="600" value="145" step="1" />
+    </div>
+
+    <div class="field">
+      <label>95th Percentile (P95) Latency <span class="val" id="v-p95">210 ms</span></label>
+      <input type="range" id="p95" min="40" max="900" value="210" step="1" />
+    </div>
+
+    <div class="field">
+      <label>Aviation Safety Threshold <span class="val" id="v-thr">200 ms</span></label>
+      <input type="range" id="thr" min="80" max="500" value="200" step="5" />
+    </div>
+
+    <div class="field">
+      <label>Handshake Overhead <span class="val" id="v-ovh">1.4 KB</span></label>
+      <input type="range" id="ovh" min="0.05" max="3.0" value="1.4" step="0.05" />
+    </div>
+
+    <div class="field">
+      <label>CPU Stress at Handshake <span class="val" id="v-cpu">72 %</span></label>
+      <input type="range" id="cpu" min="5" max="100" value="72" step="1" />
+    </div>
+
+    <div class="field">
+      <label>Link Throughput <span class="val" id="v-thr2">12 Mbps</span></label>
+      <input type="range" id="thr2" min="1" max="30" value="12" step="0.5" />
+    </div>
+
+    <h2 style="margin-top:22px"><span class="dot" style="background:#636EFA;box-shadow:0 0 8px #636EFA"></span> Cryptographic Posture</h2>
+
+    <div class="field">
+      <label>PQC Algorithm Suite</label>
+      <select id="suite">
+        <option value="ml-kem-1024">ML-KEM-1024 (FIPS 203 Level 5)</option>
+        <option value="hybrid-mlkem" selected>Hybrid ML-KEM-768 + X25519</option>
+        <option value="ml-kem-768">ML-KEM-768 (FIPS 203 Level 3)</option>
+        <option value="hybrid-rsa-pqc">Hybrid RSA-2048 + ML-KEM</option>
+        <option value="ecc-p384">ECC P-384 (Legacy Classical)</option>
+        <option value="rsa-2048">RSA-2048 (Legacy Classical)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Key Rotation Agility</label>
+      <select id="agility">
+        <option value="continuous">Continuous / Automated</option>
+        <option value="quarterly" selected>Quarterly</option>
+        <option value="annual">Annual</option>
+        <option value="none">No formal rotation policy</option>
+      </select>
+    </div>
+
+    <label class="check-row">
+      <input type="checkbox" id="sca" checked />
+      <span class="lbl">Side-channel countermeasures enabled</span>
+      <span class="wt">+3</span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="formal" />
+      <span class="lbl">Formal verification of handshake state machine</span>
+      <span class="wt">+3</span>
+    </label>
+
+    <h2 style="margin-top:22px"><span class="dot" style="background:#AB63FA;box-shadow:0 0 8px #AB63FA"></span> ML Detection Efficacy</h2>
+
+    <div class="field">
+      <label>Classifier Accuracy <span class="val" id="v-acc">0.94</span></label>
+      <input type="range" id="acc" min="0.5" max="1.0" value="0.94" step="0.01" />
+    </div>
+    <div class="field">
+      <label>Precision <span class="val" id="v-prec">0.92</span></label>
+      <input type="range" id="prec" min="0.3" max="1.0" value="0.92" step="0.01" />
+    </div>
+    <div class="field">
+      <label>Recall <span class="val" id="v-rec">0.89</span></label>
+      <input type="range" id="rec" min="0.3" max="1.0" value="0.89" step="0.01" />
+    </div>
+
+    <h2 style="margin-top:22px"><span class="dot" style="background:#EF553B;box-shadow:0 0 8px #EF553B"></span> Regulatory Coverage</h2>
+
+    <label class="check-row">
+      <input type="checkbox" id="icao" checked />
+      <span class="lbl">ICAO Safety Management System (SeMS)</span>
+      <span class="wt">22%</span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="easa" checked />
+      <span class="lbl">EASA Part-IS Information Security</span>
+      <span class="wt">22%</span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="nist" checked />
+      <span class="lbl">NIST FIPS 203 / 204 PQC Standards</span>
+      <span class="wt">31%</span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="iso" checked />
+      <span class="lbl">ISO/IEC 27001 Annex A Controls</span>
+      <span class="wt">25%</span>
+    </label>
+  </aside>
+
+  <!-- ================= RESULTS PANEL ================= -->
+  <section class="panel">
+    <h2><span class="dot" style="background:#00CC96;box-shadow:0 0 8px #00CC96"></span> Composite Framework Score</h2>
+
+    <div class="results-grid">
+      <div class="gauge-wrap">
+        <svg id="gauge" width="280" height="170" viewBox="0 0 280 170"></svg>
+        <div class="gauge-label">Overall Readiness Index</div>
+        <div class="verdict" id="verdict">
+          <div class="title">Initialising…</div>
+          <div class="msg">Adjust parameters to compute score.</div>
+        </div>
+      </div>
+
+      <div>
+        <svg id="radar" width="100%" height="320" viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= DIMENSION BREAKDOWN ================= -->
+<div class="dims" id="dims"></div>
+
+<!-- ================= REGULATORY MATRIX ================= -->
+<div class="matrix-wrap">
+  <h2 style="font-size:14px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:0 0 12px 0;font-weight:600;">
+    📜 Regulatory Traceability Matrix
+  </h2>
+  <table class="matrix" id="matrix">
+    <thead>
+      <tr>
+        <th>Standard</th>
+        <th>Requirement</th>
+        <th>Status</th>
+        <th>Evidence</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- ================= FORMULA ================= -->
+<div class="formula" id="formula">
+  <b>Composite Score</b> = 0.30·Safety + 0.25·Crypto + 0.20·Performance + 0.15·Detection + 0.10·Regulatory<br>
+  <span id="formula-values"></span>
+</div>
+
+<footer>
+  Quantum-Resilient Cyber-Safety Governance and Consolidated Internal Control Framework for Commercial Aviation · Composite scoring model v1.0 · Joel Aluko Olatunji 25012052
+</footer>
+
+<script>
+/* ============================================================
+   DIMENSION DEFINITIONS & WEIGHTS
+   ============================================================ */
+const DIMENSIONS = [
+  { key: 'safety',  name: 'Safety Compliance',   weight: 0.30, color: '#00CC96' },
+  { key: 'crypto',  name: 'Crypto Resilience',   weight: 0.25, color: '#636EFA' },
+  { key: 'perf',    name: 'Performance Efficiency', weight: 0.20, color: '#FFA15A' },
+  { key: 'detect',  name: 'Threat Detection',    weight: 0.15, color: '#AB63FA' },
+  { key: 'reg',     name: 'Regulatory Alignment', weight: 0.10, color: '#EF553B' }
+];
+
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+/* ============================================================
+   SCORING FUNCTIONS — one per dimension
+   ============================================================ */
+
+function scoreSafety(mean, p95, threshold) {
+  const avgRatio  = mean / threshold;
+  const tailRatio = p95  / threshold;
+  // Perfect when avg <= 0.50 and p95 <= 0.65 of threshold
+  const sAvg  = clamp((1.00 - avgRatio)  / (1.00 - 0.50) * 100, 0, 100);
+  const sTail = clamp((1.15 - tailRatio) / (1.15 - 0.65) * 100, 0, 100);
+  return 0.35 * sAvg + 0.65 * sTail; // tail latency weighted heavier
+}
+
+function scoreCrypto(suite, agility, sca, formal) {
+  const base = {
+    'ml-kem-1024':    100,
+    'hybrid-mlkem':    96,
+    'ml-kem-768':      92,
+    'hybrid-rsa-pqc':  78,
+    'ecc-p384':        40,
+    'rsa-2048':        20
+  }[suite] ?? 50;
+
+  const agilityBonus = { none: 0, annual: 2, quarterly: 5, continuous: 8 }[agility] ?? 0;
+  const scaBonus     = sca    ? 3 : 0;
+  const formalBonus  = formal ? 3 : 0;
+
+  return clamp(base + agilityBonus + scaBonus + formalBonus, 0, 100);
+}
+
+function scorePerformance(overheadKB, cpuStress, throughput) {
+  const sOverhead  = clamp((2.0 - overheadKB) / (2.0 - 0.10) * 100, 0, 100);
+  const sCpu       = clamp((100 - cpuStress)  / (100 - 10)   * 100, 0, 100);
+  const sThrough   = clamp((throughput - 2)   / (20 - 2)     * 100, 0, 100);
+  return 0.40 * sOverhead + 0.35 * sCpu + 0.25 * sThrough;
+}
+
+function scoreDetection(acc, prec, rec) {
+  const f1 = (prec + rec) > 0 ? (2 * prec * rec) / (prec + rec) : 0;
+  const sAcc = clamp((acc - 0.50) / 0.50 * 100, 0, 100);
+  const sF1  = clamp(f1 * 100, 0, 100);
+  return 0.35 * sAcc + 0.65 * sF1; // F1 dominates: balance matters more than raw accuracy
+}
+
+function scoreRegulatory(flags) {
+  const weights = { icao: 0.22, easa: 0.22, nist: 0.31, iso: 0.25 };
+  let s = 0;
+  for (const k in weights) if (flags[k]) s += weights[k];
+  return s * 100;
+}
+
+/* ============================================================
+   AGGREGATION
+   ============================================================ */
+
+function computeAll() {
+  const g = id => document.getElementById(id);
+
+  const mean   = +g('mean').value;
+  const p95    = +g('p95').value;
+  const thr    = +g('thr').value;
+  const ovh    = +g('ovh').value;
+  const cpu    = +g('cpu').value;
+  const thru   = +g('thr2').value;
+  const suite  = g('suite').value;
+  const agility= g('agility').value;
+  const sca    = g('sca').checked;
+  const formal = g('formal').checked;
+  const acc    = +g('acc').value;
+  const prec   = +g('prec').value;
+  const rec    = +g('rec').value;
+  const flags  = {
+    icao: g('icao').checked,
+    easa: g('easa').checked,
+    nist: g('nist').checked,
+    iso:  g('iso').checked
+  };
+
+  const scores = {
+    safety: scoreSafety(mean, p95, thr),
+    crypto: scoreCrypto(suite, agility, sca, formal),
+    perf:   scorePerformance(ovh, cpu, thru),
+    detect: scoreDetection(acc, prec, rec),
+    reg:    scoreRegulatory(flags)
+  };
+
+  const composite = DIMENSIONS.reduce((sum, d) => sum + d.weight * scores[d.key], 0);
+
+  return { scores, composite, inputs: { mean, p95, thr, ovh, cpu, thru, suite, agility, sca, formal, acc, prec, rec, flags } };
+}
+
+/* ============================================================
+   RENDER: GAUGE
+   ============================================================ */
+
+function drawGauge(score) {
+  const svg = document.getElementById('gauge');
+  const cx = 140, cy = 140, r = 100;
+  const L = Math.PI * r; // semicircle length
+
+  const color = score >= 85 ? '#00CC96'
+              : score >= 70 ? '#FFA15A'
+              : score >= 55 ? '#F2C744'
+              : '#EF553B';
+
+  const path = `M ${cx - r} ${cy} A ${r} ${r} 0 0 1 ${cx + r} ${cy}`;
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"  stop-color="${color}" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="${color}" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+
+    <!-- tick marks -->
+    ${[0,20,40,60,80,100].map(t => {
+      const a = Math.PI - (t/100) * Math.PI;
+      const x1 = cx + (r + 8) * Math.cos(a);
+      const y1 = cy - (r + 8) * Math.sin(a);
+      const x2 = cx + (r + 16) * Math.cos(a);
+      const y2 = cy - (r + 16) * Math.sin(a);
+      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#30363d" stroke-width="1.5"/>
+              <text x="${cx + (r + 26) * Math.cos(a)}" y="${cy - (r + 26) * Math.sin(a) + 3}"
+                    fill="#8b949e" font-size="9" text-anchor="middle">${t}</text>`;
+    }).join('')}
+
+    <!-- background arc -->
+    <path d="${path}" fill="none" stroke="#21262d" stroke-width="16" stroke-linecap="round"/>
+
+    <!-- score arc -->
+    <path d="${path}" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round"
+          stroke-dasharray="${(score/100) * L} ${L}" />
+
+    <!-- needle -->
+    <g transform="translate(${cx}, ${cy}) rotate(${-90 + (score/100)*180})">
+      <line x1="0" y1="0" x2="${r - 22}" y2="0" stroke="${color}" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <circle cx="${cx}" cy="${cy}" r="7" fill="${color}" />
+    <circle cx="${cx}" cy="${cy}" r="3" fill="#0e1117" />
+
+    <!-- score text -->
+    <text x="${cx}" y="${cy - 42}" text-anchor="middle" fill="#e6edf3"
+          font-size="42" font-weight="700" font-family="-apple-system,Segoe UI,sans-serif">${score.toFixed(1)}</text>
+    <text x="${cx}" y="${cy - 20}" text-anchor="middle" fill="#8b949e"
+          font-size="11" letter-spacing="1.5">OUT OF 100</text>
+  `;
+}
+
+/* ============================================================
+   RENDER: RADAR CHART
+   ============================================================ */
+
+function drawRadar(scores) {
+  const svg = document.getElementById('radar');
+  const cx = 200, cy = 160, R = 110;
+  const N = DIMENSIONS.length;
+  const angles = DIMENSIONS.map((_, i) => -Math.PI/2 + (2 * Math.PI * i) / N);
+
+  const pointAt = (i, value) => {
+    const a = angles[i];
+    const rr = (value / 100) * R;
+    return [cx + rr * Math.cos(a), cy + rr * Math.sin(a)];
+  };
+
+  // grid rings
+  let grid = '';
+  [20, 40, 60, 80, 100].forEach(ring => {
+    const pts = DIMENSIONS.map((_, i) => pointAt(i, ring).join(',')).join(' ');
+    grid += `<polygon points="${pts}" fill="none" stroke="#30363d" stroke-width="0.8" opacity="0.7"/>`;
+  });
+
+  // axes + labels
+  let axes = '';
+  DIMENSIONS.forEach((d, i) => {
+    const [x, y] = pointAt(i, 100);
+    axes += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#30363d" stroke-width="0.8"/>`;
+
+    const [lx, ly] = pointAt(i, 122);
+    const anchor = Math.abs(lx - cx) < 8 ? 'middle' : (lx > cx ? 'start' : 'end');
+    const label = d.name.split(' ');
+    axes += `<text x="${lx}" y="${ly}" fill="#8b949e" font-size="10.5"
+                   text-anchor="${anchor}" font-weight="600">${label[0]}</text>`;
+    if (label[1]) {
+      axes += `<text x="${lx}" y="${ly + 12}" fill="#6e7681" font-size="9.5" text-anchor="${anchor}">${label.slice(1).join(' ')}</text>`;
+    }
+  });
+
+  // data polygon
+  const dataPts = DIMENSIONS.map((d, i) => pointAt(i, scores[d.key]));
+  const dataPoly = dataPts.map(p => p.join(',')).join(' ');
+
+  // data points
+  let dots = '';
+  dataPts.forEach((p, i) => {
+    dots += `<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="${DIMENSIONS[i].color}"
+                     stroke="#0e1117" stroke-width="1.5"/>`;
+  });
+
+  svg.innerHTML = `
+    ${grid}
+    ${axes}
+    <polygon points="${dataPoly}" fill="rgba(88,166,255,0.20)"
+             stroke="#58a6ff" stroke-width="2" stroke-linejoin="round"/>
+    ${dots}
+  `;
+}
+
+/* ============================================================
+   RENDER: DIMENSION CARDS
+   ============================================================ */
+
+function drawDimensions(scores) {
+  const container = document.getElementById('dims');
+  container.innerHTML = DIMENSIONS.map(d => {
+    const s = scores[d.key];
+    const grade = s >= 85 ? 'Excellent' : s >= 70 ? 'Good' : s >= 55 ? 'Marginal' : 'Critical';
+    return `
+      <div class="dim-card" style="border-top: 3px solid ${d.color}">
+        <div class="top">
+          <div class="name">${d.name}</div>
+          <div class="weight">${(d.weight*100).toFixed(0)}% weight</div>
+        </div>
+        <div class="score" style="color:${d.color}">${s.toFixed(1)}<small> / 100</small></div>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:${s}%; background: linear-gradient(90deg, ${d.color}66, ${d.color});"></div>
+        </div>
+        <div class="hint">${grade} · contributes ${(d.weight * s).toFixed(1)} pts to composite</div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ============================================================
+   RENDER: VERDICT
+   ============================================================ */
+
+function drawVerdict(composite, inputs) {
+  const el = document.getElementById('verdict');
+  el.classList.remove('warn', 'bad');
+
+  let title, msg, cls = '';
+
+  if (composite >= 85) {
+    title = '✅ OPERATIONAL';
+    msg = 'Framework meets aviation safety and PQC governance standards. Cleared for deployment in A2G safety-critical links.';
+  } else if (composite >= 70) {
+    title = '⚠️ CONDITIONAL';
+    msg = 'Framework is broadly compliant. Targeted remediation required on the weakest dimension before full certification.';
+    cls = 'warn';
+  } else if (composite >= 55) {
+    title = '⚠️ MARGINAL';
+    msg = 'Significant gaps detected. PQC handshake stability or governance coverage is insufficient for safety-critical operations.';
+    cls = 'warn';
+  } else {
+    title = '🚫 CRITICAL FAILURE';
+    msg = 'Framework is unsuitable for safety-critical A2G deployment. Architectural redesign required.';
+    cls = 'bad';
+  }
+
+  el.classList.add(...(cls ? [cls] : []));
+  el.innerHTML = `<div class="title">${title}</div><div class="msg">${msg}</div>`;
+}
+
+/* ============================================================
+   RENDER: REGULATORY MATRIX
+   ============================================================ */
+
+function drawMatrix(inputs) {
+  const { flags, mean, p95, thr, suite, agility, acc, prec, rec, sca, formal } = inputs;
+
+  const latOk   = p95 <= thr;
+  const latMarg = p95 > thr && p95 <= thr * 1.15;
+
+  const rows = [
+    {
+      std: 'ICAO SeMS',
+      req: 'Latency Oversight',
+      status: flags.icao ? (latOk ? 'PASS' : latMarg ? 'PARTIAL' : 'FAIL') : 'FAIL',
+      ev: flags.icao
+        ? `P95 ${p95}ms vs ${thr}ms limit`
+        : 'Not assessed in this configuration'
+    },
+    {
+      std: 'EASA Part-IS',
+      req: 'Cryptographic Resilience',
+      status: flags.easa ? (suite.startsWith('rsa') || suite.startsWith('ecc') ? 'PARTIAL' : 'PASS') : 'FAIL',
+      ev: flags.easa ? `Suite: ${suite.toUpperCase().replace(/-/g,' ')}` : 'Control not declared'
+    },
+    {
+      std: 'NIST FIPS 203/204',
+      req: 'Algorithm Agility & Rotation',
+      status: flags.nist ? (agility === 'continuous' || agility === 'quarterly' ? 'PASS' : agility === 'annual' ? 'PARTIAL' : 'FAIL') : 'FAIL',
+      ev: flags.nist ? `Rotation policy: ${agility}` : 'PQC migration not evidenced'
+    },
+    {
+      std: 'ISO/IEC 27001',
+      req: 'Annex A Technical Controls',
+      status: flags.iso ? (sca && formal ? 'PASS' : sca || formal ? 'PARTIAL' : 'FAIL') : 'FAIL',
+      ev: flags.iso
+        ? `SCA: ${sca ? 'on' : 'off'} · Formal verify: ${formal ? 'on' : 'off'}`
+        : 'ISMS scope not declared'
+    },
+    {
+      std: 'Internal ML Assurance',
+      req: 'Adversarial Detection Efficacy',
+      status: (prec >= 0.9 && rec >= 0.9) ? 'PASS' : (prec >= 0.75 && rec >= 0.75) ? 'PARTIAL' : 'FAIL',
+      ev: `Acc ${acc.toFixed(2)} · P ${prec.toFixed(2)} · R ${rec.toFixed(2)}`
+    }
+  ];
+
+  const tbody = document.querySelector('#matrix tbody');
+  tbody.innerHTML = rows.map(r => {
+    const cls = r.status === 'PASS' ? 'pass' : r.status === 'PARTIAL' ? 'partial' : 'fail';
+    return `
+      <tr>
+        <td><b>${r.std}</b></td>
+        <td>${r.req}</td>
+        <td><span class="pill ${cls}">${r.status}</span></td>
+        <td class="mono" style="color:var(--muted);font-size:12px">${r.ev}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+/* ============================================================
+   RENDER: FORMULA BREAKDOWN
+   ============================================================ */
+
+function drawFormula(scores, composite) {
+  const parts = DIMENSIONS.map(d => {
+    const contrib = (d.weight * scores[d.key]).toFixed(2);
+    return `${d.weight.toFixed(2)}×${scores[d.key].toFixed(1)} = <b>${contrib}</b>`;
+  }).join('  ·  ');
+
+  document.getElementById('formula-values').innerHTML =
+    `${parts}<br><b style="color:#00CC96;font-size:13px">Composite = ${composite.toFixed(2)} / 100</b>`;
+}
+
+/* ============================================================
+   MASTER RENDER + INPUT BINDING
+   ============================================================ */
+
+function render() {
+  // update value readouts
+  const readouts = [
+    ['mean','v-mean', v => v + ' ms'],
+    ['p95','v-p95',   v => v + ' ms'],
+    ['thr','v-thr',   v => v + ' ms'],
+    ['ovh','v-ovh',   v => (+v).toFixed(2) + ' KB'],
+    ['cpu','v-cpu',   v => v + ' %'],
+    ['thr2','v-thr2', v => v + ' Mbps'],
+    ['acc','v-acc',   v => (+v).toFixed(2)],
+    ['prec','v-prec', v => (+v).toFixed(2)],
+    ['rec','v-rec',   v => (+v).toFixed(2)]
+  ];
+  readouts.forEach(([inId, outId, fmt]) => {
+    const el = document.getElementById(inId);
+    document.getElementById(outId).textContent = fmt(el.value);
+  });
+
+  const { scores, composite, inputs } = computeAll();
+
+  drawGauge(composite);
+  drawRadar(scores);
+  drawDimensions(scores);
+  drawVerdict(composite, inputs);
+  drawMatrix(inputs);
+  drawFormula(scores, composite);
+
+  // stash for export
+  window.__lastResult = { scores, composite, inputs, timestamp: new Date().toISOString() };
+}
+
+/* Bind all inputs */
+document.getElementById('inputs').addEventListener('input', render);
+document.getElementById('inputs').addEventListener('change', render);
+
+/* ============================================================
+   BASELINE PREFILL (matches your thesis artefacts)
+   ============================================================ */
+
+function loadBaseline() {
+  const set = (id, val) => { document.getElementById(id).value = val; };
+  set('mean', 145);
+  set('p95', 210);
+  set('thr', 200);
+  set('ovh', 1.4);
+  set('cpu', 72);
+  set('thr2', 12);
+  set('suite', 'hybrid-mlkem');
+  set('agility', 'quarterly');
+  document.getElementById('sca').checked = true;
+  document.getElementById('formal').checked = false;
+  set('acc', 0.94);
+  set('prec', 0.92);
+  set('rec', 0.89);
+  document.getElementById('icao').checked = true;
+  document.getElementById('easa').checked = true;
+  document.getElementById('nist').checked = true;
+  document.getElementById('iso').checked = true;
+  render();
+}
+
+/* ============================================================
+   EXPORT REPORT
+   ============================================================ */
+
+function exportReport() {
+  const r = window.__lastResult;
+  if (!r) return;
+
+  const report = {
+    framework: 'Quantum-Resilient Cyber-Safety Governance and Consolidated Internal Control Framework for Commercial Aviation',
+    institution: 'UWE Bristol',
+    candidate: 'Joel Aluko Olatunji 25012052',
+    generated: r.timestamp,
+    composite_score: +r.composite.toFixed(2),
+    verdict:
+      r.composite >= 85 ? 'OPERATIONAL' :
+      r.composite >= 70 ? 'CONDITIONAL' :
+      r.composite >= 55 ? 'MARGINAL' : 'CRITICAL',
+    dimension_scores: Object.fromEntries(
+      DIMENSIONS.map(d => [d.name, +r.scores[d.key].toFixed(2)])
+    ),
+    dimension_weights: Object.fromEntries(DIMENSIONS.map(d => [d.name, d.weight])),
+    weighted_contributions: Object.fromEntries(
+      DIMENSIONS.map(d => [d.name, +(d.weight * r.scores[d.key]).toFixed(3)])
+    ),
+    inputs: r.inputs,
+    regulatory_matrix: Array.from(document.querySelectorAll('#matrix tbody tr')).map(tr => ({
+      standard: tr.cells[0].innerText,
+      requirement: tr.cells[1].innerText,
+      status: tr.cells[2].innerText,
+      evidence: tr.cells[3].innerText
+    }))
+  };
+
+  const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `pqc_aviation_framework_score_${Date.now()}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+loadBaseline();
+</script>
+
+</body>
+</html>
